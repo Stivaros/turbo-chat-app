@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :rooms
+  resources :rooms do
+    resources :messages
+  end
   resources :users
   root 'rooms#index'
   get '/signin', to: 'sessions#new'
