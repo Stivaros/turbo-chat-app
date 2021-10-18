@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch("DB_HOST", 'localhost') %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: <%= ENV.fetch("DB_PORT", 5432) %>
+  username: <%= ENV.fetch("DB_USERNAME", 'postgres') %>
+
+development:
+  <<: *default
+  database: turbo_chat_app_development
+
+test:
+  <<: *default
+  database: turbo_chat_app_test
+
+production:
+  <<: *default
+  host: <%= ENV["DB_HOST"] %>
+  database: <%= ENV.fetch("DB_NAME", 'turbo_chat_app') %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
